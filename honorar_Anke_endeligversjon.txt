@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Honorarberegning Anke</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      margin: 30px;
+      background: #e6e9ed;
+    }
+    .container {
+      background: #f8fbfc;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 550px;
+      margin: auto;
+      box-shadow: 0 6px 12px rgba(100,120,140,0.15);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 22px;
+      color: #324a64;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    .section {
+      background: #d6dde3;
+      padding: 16px 18px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(50,74,100,0.1);
+      border: 1px solid #a9b9c9;
+    }
+    .section h3 {
+      margin-top: 0;
+      font-size: 1.15em;
+      border-bottom: 2px solid #9bb3c0;
+      padding-bottom: 6px;
+      color: #2a3d53;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+      color: #566d85;
+    }
+    input {
+      width: 100%;
+      padding: 9px 12px;
+      margin-top: 6px;
+      border: 1.8px solid #a3aebc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2f3e52;
+      box-shadow: inset 0 2px 6px rgba
