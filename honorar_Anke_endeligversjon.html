@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Honorarberegning Anke</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      margin: 30px;
+      background: #e6e9ed;
+    }
+    .container {
+      background: #f8fbfc;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 550px;
+      margin: auto;
+      box-shadow: 0 6px 12px rgba(100,120,140,0.15);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 22px;
+      color: #324a64;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    .section {
+      background: #d6dde3;
+      padding: 16px 18px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(50,74,100,0.1);
+      border: 1px solid #a9b9c9;
+    }
+    .section h3 {
+      margin-top: 0;
+      font-size: 1.15em;
+      border-bottom: 2px solid #9bb3c0;
+      padding-bottom: 6px;
+      color: #2a3d53;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+      color: #566d85;
+    }
+    input {
+      width: 100%;
+      padding: 9px 12px;
+      margin-top: 6px;
+      border: 1.8px solid #a3aebc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2f3e52;
+      box-shadow: inset 0 2px 6px rgba(255,255,255,0.8);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus {
+      border-color: #729fcf;
+      box-shadow: 0 0 6px 2px rgba(114,159,207,0.6);
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px 0;
+      background: #4a6fa5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(74,111,165,0.5);
+      transition: background-color 0.25s ease;
+      margin-top: 12px;
+      letter-spacing: 0.7px;
+    }
+    button:hover {
+      background: #335082;
+      box-shadow: 0 6px 14px rgba(51,80,130,0.7);
+    }
+    .output {
+      margin-top: 22px;
+      font-size: 1.1rem;
+      background: #e4ecf7;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #aec1d7;
+      box-shadow: 0 2px 6px rgba(111,135,172,0.3);
+      color: #2e3e5c;
+      line-height: 1.4;
+    }
+    #beregningChart {
+      margin-top: 25px;
+      max-height: 380px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(100,120,140,0.2);
+      background: white;
+    }
+    .periode-flex {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .periode-flex > div {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Honorarberegning Anke</h2>
+
+    <!-- Monat & Jahr -->
+    <div class="section">
+      <h3>Periode</h3>
+      <div class="periode-flex">
+        <div>
+          <label for="monat">Måned:</label>
+          <input id="monat" type="text" placeholder="f.eks. Januar" />
+        </div>
+        <div>
+          <label for="jahr">År:</label>
+          <input id="jahr" type="text" placeholder="f.eks. 2025" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Omsetning -->
+    <div class="section">
+      <h3>Omsetning denne perioden</h3>
+      <label for="omsetning">Total omsetning (NOK):</label>
+      <input id="omsetning" type="text" inputmode="decimal" placeholder="kr" />
+    </div>
+
+    <!-- Innbetalinger -->
+    <div class="section">
+      <h3>Innbetalinger</h3>
+      <label for="kontant">Kontantbetaling (NOK):</label>
+      <input id="kontant" type="text" inputmode="decimal" placeholder="kr" />
+      <label for="bankkort">Bankkort (NOK):</label>
+      <input id="bankkort" type="text" inputmode="decimal" placeholder="kr" />
+      <label for="bank">Bankinnbetalinger (NOK):</label>
+      <input id="bank" type="text" inputmode="decimal" placeholder="kr" />
+    </div>
+
+    <!-- Fratrekk -->
+    <div class="section">
+      <h3>Fratrekk</h3>
+      <label for="tanntekniker">Tanntekniker (NOK):</label>
+      <input id="tanntekniker" type="text" inputmode="decimal" placeholder="kr" />
+      <label for="salg">Salg (NOK):</label>
+      <input id="salg" type="text" inputmode="decimal" placeholder="kr" />
+      <label for="annen">Annen (NOK):</label>
+      <input id="annen" type="text" inputmode="decimal" placeholder="kr" />
+      <input id="annen_beskrivelse" type="text" placeholder="Beskrivelse av 'Annen'" />
+    </div>
+
+    <!-- Annen inntekt -->
+    <div class="section">
+      <h3>Annen inntekt</h3>
+      <label for="annen_inntekt">Beløp (NOK):</label>
+      <input id="annen_inntekt" type="text" inputmode="decimal" placeholder="kr" />
+      <label for="annen_inntekt_beskrivelse">Beskrivelse annen inntekt:</label>
+      <input id="annen_inntekt_beskrivelse" type="text" placeholder="Beskrivelse..." />
+    </div>
+
+    <button onclick="beregn()">Beregn</button>
+
+    <div class="output" id="resultat" style="display:none;"></div>
+    <canvas id="beregningChart"></canvas>
+  </div>
+
+  <script>
+    let chart;
+    function tilTall(id) {
+      const val = parseFloat(document.getElementById(id).value.replace(",", "."));
+      return isNaN(val) ? 0 : val;
+    }
+    function beregn() {
+      const monat = document.getElementById("monat").value.trim();
+      const jahr = document.getElementById("jahr").value.trim();
+      const annenInntekt = tilTall("annen_inntekt");
+      const omsetning = tilTall("omsetning");
+      const kontant = tilTall("kontant");
+      const bankkort = tilTall("bankkort");
+      const bank = tilTall("bank");
+      const tanntekniker = tilTall("tanntekniker");
+      const salg = tilTall("salg");
+      const annen = tilTall("annen");
+      const annenInntektTekst = document.getElementById("annen_inntekt_beskrivelse").value.trim();
+      const annenBeskrivelse = document.getElementById("annen_beskrivelse").value.trim();
+      const sumInnbetalinger = kontant + bankkort + bank + annenInntekt;
+      const sumFratrekk = tanntekniker + salg + annen;
+      const nettoInntekt = sumInnbetalinger - sumFratrekk;
+      const leieberegning = nettoInntekt * 0.45;
+      const klinikkandel = nettoInntekt - leieberegning;
+      const diff = sumInnbetalinger - omsetning;
+      const fratrekkProsent = sumInnbetalinger > 0 ? (sumFratrekk / sumInnbetalinger) * 100 : 0;
+
+      let resultat = `<b>Beregning:</b><br>`;
+      if(monat) resultat += `Periode: ${monat}`;
+      if(monat && jahr) resultat += ` / `;
+      if(jahr) resultat += `${jahr}`;
+      resultat += `<br><br>`;
+      resultat += `Total omsetning: ${omsetning.toFixed(2)} kr<br>`;
+      resultat += `Sum innbetalinger: ${sumInnbetalinger.toFixed(2)} kr<br>`;
+      resultat += `Sum fratrekk: ${sumFratrekk.toFixed(2)} kr (${fratrekkProsent.toFixed(1)}%)<br><br>`;
+      resultat += `Netto inntekt leieberegning: ${nettoInntekt.toFixed(2)} kr<br>`;
+      resultat += `<b>45&percnt; utbetaling: ${leieberegning.toFixed(2)} kr</b><br>`;
+      resultat += `Klinikkandel: ${klinikkandel.toFixed(2)} kr<br>`;
+      resultat += `Differanse innbetaling/omsetning: ${diff.toFixed(2)} kr`;
+
+      if (annenInntekt > 0 && annenInntektTekst) {
+        resultat += `<br><span style="font-size:0.95em;">Annen inntekt: ${annenInntektTekst}</span>`;
+      }
+      if (annen > 0 && annenBeskrivelse) {
+        resultat += `<br><span style="font-size:0.95em;">Annen fratrekk: ${annenBeskrivelse}</span>`;
+      }
+
+      document.getElementById("resultat").innerHTML = resultat;
+      document.getElementById("resultat").style.display = "block";
+
+      const labels = [
+        "Total omsetning",
+        "Innbetalinger",
+        "Fratrekk",
+        "Netto inntekt",
+        "Tannlegehonorar (45%)",
+        "Klinikkandel (55%)",
+        "Diff. innb/oms"
+      ];
+      const data = [omsetning, sumInnbetalinger, sumFratrekk, nettoInntekt, leieberegning, klinikkandel, diff];
+      const colors = [
+        "#91b3d1","#6387c8","#d88b8b","#d4ba86","#8bbf99","#b5c7b9","#bfbfbf"
+      ];
+
+      if (chart) chart.destroy();
+      chart = new Chart(document.getElementById("beregningChart"), {
+        type: "bar",
+        data: { labels: labels, datasets: [{ label: "Beløp (kr)", data: data, backgroundColor: colors }] },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Kr" }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
